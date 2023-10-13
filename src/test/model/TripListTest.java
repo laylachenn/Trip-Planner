@@ -6,19 +6,20 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TripListTest {
     private TripList testTripList;
     private Trip trip1;
     private Trip trip2;
+    private Trip nonExistentTrip;
 
     @BeforeEach
     void runBefore() {
         testTripList = new TripList();
         trip1 = new Trip(new ArrayList<>(), 0, new ArrayList<>(), new ArrayList<>());
         trip2 = new Trip(new ArrayList<>(), 0, new ArrayList<>(), new ArrayList<>());
+        nonExistentTrip = new Trip(new ArrayList<>(), 0, new ArrayList<>(), new ArrayList<>());
     }
 
     @Test
@@ -45,6 +46,14 @@ public class TripListTest {
         assertEquals("Not a great experience. Wouldn't come back as the whole city is full of tourists.",
                 trip2.getReview());
 
+    }
+
+    @Test
+    public void testCreateReviewNonExistentTrip() {
+        testTripList.addTrip(trip1);
+        testTripList.addTrip(trip2);
+        boolean result = testTripList.createReview(nonExistentTrip, "This is a review for a non existent trip.");
+        assertFalse(result);
     }
 }
 

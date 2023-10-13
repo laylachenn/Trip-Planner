@@ -10,7 +10,10 @@ public class Trip {
     private final List<String> destinations; //list of the destination(s)
     private String review = ""; //string of the post-travel review as an empty string so it is never nul
 
-    //REQUIRES:
+    //REQUIRES: flights to not be null, hotels to not be null, destinations to not be null and tripLength to have
+    //a non-zero length
+    //EFFECTS: constructs a trip that has a list of flights, an amount of days that the trip will be, a list of hotel(s)
+    //and a list of destination(s)
     public Trip(List<String> flights, int tripLength, List<String> hotels, List<String> destinations) {
         this.flights = flights;
         this.tripLength = tripLength;
@@ -22,14 +25,17 @@ public class Trip {
         this.tripLength = tripLength;
     }
 
+    //EFFECTS: adds a flight to the list of flights
     public void addFlight(String flight) {
         flights.add(flight);
     }
 
+    //EFFECTS: adds a hotel to the list of hotels
     public void addHotel(String hotel) {
         hotels.add(hotel);
     }
 
+    //EFFECTS: adds a destination to the list of destinations
     public void addDestination(String destination) {
         destinations.add(destination);
     }
@@ -58,7 +64,7 @@ public class Trip {
         this.review = review;
     }
 
-    //EFFECTS: returns a string representation of account
+    //EFFECTS: returns a string representation of the trip information
     //(inspired by/sourced from Teller application in the Account class)
     @Override
     public String toString() {
