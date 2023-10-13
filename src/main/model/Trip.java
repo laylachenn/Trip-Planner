@@ -49,4 +49,14 @@ public class Trip {
         return destinations;
     }
 
+    //EFFECTS: returns a string representation of account
+    //(inspired by/sourced from Teller application in the Account class)
+    @Override
+    public String toString() {
+        return "Trip Information:\n" + "Flight Information: " + flights + "\n"
+                + "Trip Length: " + tripLength + "\n" + "Hotels: " + hotels + "\n"
+                + "Destinations: " + destinations;
+
+    }
+
 }
