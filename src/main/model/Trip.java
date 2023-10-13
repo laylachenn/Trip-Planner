@@ -1,6 +1,5 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 //Represents a trip having flights, number of days the trip is, hotels, and destinations.
@@ -9,7 +8,9 @@ public class Trip {
     private final List<String> flights; //list of the flights
     private final List<String> hotels; //list of the name(s) of the hotel(s)
     private final List<String> destinations; //list of the destination(s)
+    private String review; //string of the post-travel review
 
+    //REQUIRES:
     public Trip(List<String> flights, int tripLength, List<String> hotels, List<String> destinations) {
         this.flights = flights;
         this.tripLength = tripLength;
@@ -47,6 +48,14 @@ public class Trip {
 
     public List<String> getDestinations() {
         return destinations;
+    }
+
+    public String getReview() {
+        return review;
+    }
+
+    public void setReview(String review) {
+        this.review = review;
     }
 
     //EFFECTS: returns a string representation of account
