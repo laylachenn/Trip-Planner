@@ -82,4 +82,13 @@ class TripTest {
 
         assertEquals(expectedDestinations, testTrip.getDestinations());
     }
+
+    @Test
+    public void testToString() {
+        String expectedString = "Trip Information:\nFlight Information: [YVR-JFK 10/25/23 @11am, JFK-YVR 10/30/23 @2pm]" +
+                "\nTrip Length: 5\nHotels: [Moxy NYC Times Square, Motto by Hilton New York City Chelsea]\n" +
+                "Destinations: [Bronxville, Yorkville]";
+
+        assertEquals(expectedString, testTrip.toString());
+    }
 }

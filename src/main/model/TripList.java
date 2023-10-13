@@ -22,9 +22,6 @@ public class TripList {
     public void createReview(Trip trip, String review) {
         if (trips.contains(trip)) {
             trip.setReview(review);
-        } else {
-            System.out.println("The trip is not found in the list.");
         }
     }
-
 }
