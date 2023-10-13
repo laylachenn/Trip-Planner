@@ -3,10 +3,11 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+//Represents
 public class TripList {
-    private List<Trip> trips;
+    private final List<Trip> trips;
 
-    public void TripList() {
+    public TripList() {
         trips = new ArrayList<>();
     }
 
