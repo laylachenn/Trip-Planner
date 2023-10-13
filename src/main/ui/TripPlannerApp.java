@@ -12,11 +12,14 @@ public class TripPlannerApp {
     private final TripList tripList;
     private final Scanner scanner;
 
+    //EFFECTS: constructs a trip list and a scanner that will read input from the user and allow for interaction
     public TripPlannerApp() {
         tripList = new TripList();
         scanner = new Scanner(System.in);
     }
 
+    //EFFECTS: prints a trip planner menu with different options for the user, and the last line will allow the user to
+    //type their choice
     private void showMenu() {
         System.out.println("Trip Planner Menu: ");
         System.out.println("1: Add a trip");
@@ -27,6 +30,10 @@ public class TripPlannerApp {
         System.out.print("Enter your choice: ");
     }
 
+    //MODIFIES: this
+    //EFFECTS: asks the user for information on the trip they would like to plan such as trip length, flights, hotels
+    //and destinations. then constructs a trip with the given information and adds it to their trip list. prints a
+    //message of success at the end.
     private void addTrip() {
         System.out.println("Enter the number of days the trip will be: ");
         int tripLength = scanner.nextInt();
@@ -49,6 +56,8 @@ public class TripPlannerApp {
         System.out.println("Trip has been added successfully!");
     }
 
+    //EFFECTS: prints a message to say that there are no trips if the trip list is empty. if the trip list is not empty,
+    //then it prints the trip list and all the trip's information including the review if there is one
     private void viewTrips() {
         List<Trip> trips = tripList.getTrips();
 
@@ -67,6 +76,9 @@ public class TripPlannerApp {
         }
     }
 
+    //EFFECTS: displays the trips so the user can select which one they want to review. print a message to the user to
+    //say there are no trips if the trip list is empty. after the user selects a trip then the user will be able to
+    //enter their review and if successful, it will print a success message. if not, it will print a failed message.
     private void createReview() {
         List<Trip> trips = tripList.getTrips();
         if (trips.isEmpty()) {
@@ -92,11 +104,17 @@ public class TripPlannerApp {
         }
     }
 
+    //EFFECTS: uses the toString method to display the trip preset information to the user
     private void displayPreset(Trip tripPreset) {
         System.out.println("Trip preset information:");
         System.out.println(tripPreset.toString());
     }
 
+    //MODIFIES: this
+    //EFFECTS: shows the user a preset menu where the user can select one of the preset options to view more
+    //information on it. then the user will be able to add the preset to their list of trips if they want. if they
+    //don't want to, then it will say that it's going back to the menu. it prints success and failure messages depending
+    //on if the trip preset has been added to the list of trips
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     private void showPresets() {
         System.out.println("Preset Trips:");
@@ -109,19 +127,22 @@ public class TripPlannerApp {
 
         Trip tripPreset = null;
 
-        ////CHANGE THE STRINGS
         switch (choice) {
             case 1:
-                tripPreset = makePreset("Tropical Hawaii Trip", List.of("Hawaii Flight"), 7,
-                        List.of("Hawaii Hotel"), List.of("Hawaii Destination (Maui)"));
+                tripPreset = makePreset("Tropical Hawaii Trip", List.of("YVR-ITO 3/21/24 @9am",
+                                "ITO-YVR 3/28/24 @1pm"), 7,
+                        List.of("Hilo Hawaiian Hotel","Paradise Bay Resort"), List.of("Hilo", "Kailua"));
                 break;
             case 2:
-                tripPreset = makePreset("Winter New York City Trip", List.of("City Flight"), 5,
-                        List.of("City Hotel"), List.of("City Destination"));
+                tripPreset = makePreset("Winter New York City Trip", List.of("YVR-JFK 12/20/23 @1am",
+                                "JFK-YVR 12/30/31 @4pm"), 10, List.of("Holiday Inn NYC", "The Manhattan"),
+                        List.of("Manhattan", "Brooklyn"));
                 break;
             case 3:
-                tripPreset = makePreset("Adventurous Japan Trip", List.of("Japan Flight"), 10,
-                        List.of("Japan Hotel"), List.of("Japan Destination (Tokyo)"));
+                tripPreset = makePreset("Adventurous Japan Trip", List.of("YVR-ITM 11/12/23 @3pm",
+                                "KIX-YVR 11/26/23 @9pm"), 14,
+                        List.of("Plaza Osaka", "Tokyo Grand Hotel", "Park Hotel Kyoto"),
+                        List.of("Osaka", "Tokyo", "Kyoto"));
                 break;
             default:
                 System.out.println("Invalid choice. Please try again.");
@@ -141,11 +162,17 @@ public class TripPlannerApp {
         }
     }
 
+    //REQUIRES: the parameters to be non-null
+    //EFFECTS: constructs a new trip object with all the details
     private Trip makePreset(String name, List<String> flights, int tripLength, List<String> hotels,
                             List<String> destinations) {
         return new Trip(flights, tripLength, hotels, destinations);
     }
 
+    //EFFECTS: creates a while loop so that the menu is constantly displayed after each of the user's choices, unless
+    //the user chooses to exit the trip planner by choosing case 5 which will exit the program. gets the user's input
+    //using scanner and based on their choice it will call different methods such as addTrip, viewTrips, etc. however,
+    //if the user chooses an invalid option, then it will display an error message
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public void start() {
         while (true) {

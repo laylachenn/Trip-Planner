@@ -12,7 +12,7 @@ public class TripList {
         trips = new ArrayList<>();
     }
 
-    //REQUIRES: a trip to have information in all of the parameters
+    //REQUIRES: a trip to have information in all the parameters
     //MODIFIES: this
     //EFFECTS: adds a trip to the list of trips
     public void addTrip(Trip trip) {
@@ -23,7 +23,8 @@ public class TripList {
         return trips;
     }
 
-    //REQUIRES:
+    //REQUIRES: if the trip list contains a trip then it will add the review to the trip information and return true,
+    // if not it will return false
     public boolean createReview(Trip trip, String review) {
         if (trips.contains(trip)) {
             trip.setReview(review);

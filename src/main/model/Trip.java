@@ -10,8 +10,7 @@ public class Trip {
     private final List<String> destinations; //list of the destination(s)
     private String review = ""; //string of the post-travel review as an empty string so it is never nul
 
-    //REQUIRES: flights to not be null, hotels to not be null, destinations to not be null and tripLength to have
-    //a non-zero length
+    //REQUIRES: all the parameters to be non-null including tripLength > 0, and to be the proper type
     //EFFECTS: constructs a trip that has a list of flights, an amount of days that the trip will be, a list of hotel(s)
     //and a list of destination(s)
     public Trip(List<String> flights, int tripLength, List<String> hotels, List<String> destinations) {
@@ -25,16 +24,19 @@ public class Trip {
         this.tripLength = tripLength;
     }
 
+    //MODIFIES: this
     //EFFECTS: adds a flight to the list of flights
     public void addFlight(String flight) {
         flights.add(flight);
     }
 
+    //MODIFIES: this
     //EFFECTS: adds a hotel to the list of hotels
     public void addHotel(String hotel) {
         hotels.add(hotel);
     }
 
+    //MODIFIES: this
     //EFFECTS: adds a destination to the list of destinations
     public void addDestination(String destination) {
         destinations.add(destination);
