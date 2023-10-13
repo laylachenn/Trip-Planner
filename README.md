@@ -14,7 +14,7 @@ to create as many different trips and itineraries as they wish, and then be able
 and filter by most expensive, least expensive, most amount of stuff to do, etc.
 
 ## User Stories
-- As a user, I want to be able to add a trip, and add its details such as flight options, number of days, hotels and
+- As a user, I want to be able to add a trip to a list, and add its details such as flight options, number of days, hotels and
 destinations.
 - As a user, I want to be able to view my list of trips, and its different information in order to make it easy to see
 the different trip options and compare itineraries.

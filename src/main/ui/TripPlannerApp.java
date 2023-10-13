@@ -5,6 +5,9 @@ import model.TripList;
 import java.util.List;
 import java.util.Scanner;
 
+//source scanner: https://www.w3schools.com/java/java_user_input.asp
+//source switch: https://docs.oracle.com/javase/tutorial/java/nutsandbolts/switch.html
+
 public class TripPlannerApp {
     private final TripList tripList;
     private final Scanner scanner;
@@ -54,7 +57,12 @@ public class TripPlannerApp {
         } else {
             System.out.println("List of trips:");
             for (int i = 0; i < trips.size(); i++) {
+                Trip trip = trips.get(i);
+                String review = trip.getReview();
                 System.out.println((i + 1) + ". " + trips.get(i).toString());
+                if (!review.isEmpty()) {
+                    System.out.println("Review: " + review);
+                }
             }
         }
     }
@@ -88,7 +96,7 @@ public class TripPlannerApp {
         System.out.println("Preset Trips:");
         System.out.println("1. Tropical Hawaii Trip");
         System.out.println("2. Winter New York City Trip");
-        System.out.println("3. Amusing Japan Trip");
+        System.out.println("3. Adventurous Japan Trip");
 
         int choice = scanner.nextInt();
         scanner.nextLine();
@@ -104,7 +112,7 @@ public class TripPlannerApp {
                         List.of("City Hotel"), List.of("City Destination"));
                 break;
             case 3:
-                makePreset("Amusing Japan Trip", List.of("Japan Flight"), 10,
+                makePreset("Adventurous Japan Trip", List.of("Japan Flight"), 10,
                         List.of("Japan Hotel"), List.of("Japan Destination (Tokyo)"));
                 break;
             default:
@@ -116,11 +124,9 @@ public class TripPlannerApp {
                             List<String> destinations) {
         Trip presetTrip = new Trip(flights, tripLength, hotels, destinations);
         System.out.println("Preset Trip: " + name);
-        System.out.println(presetTrip.toString());
+        System.out.println(presetTrip);
     }
 
-    //source: -scanner: https://www.w3schools.com/java/java_user_input.asp
-    // -switch: https://docs.oracle.com/javase/tutorial/java/nutsandbolts/switch.html
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public void start() {
         while (true) {
