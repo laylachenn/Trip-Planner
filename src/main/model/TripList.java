@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-//Represents
+//Represents a list of trips where you can modify the list by adding trips and creating a review for a trip in the list
 public class TripList {
     private final List<Trip> trips;
 

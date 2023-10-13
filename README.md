@@ -11,7 +11,7 @@ travelling and I want to make it easier for people to plan their trips and relax
 able to create multiple different trips and itineraries, and view a couple preset vacations if they're looking for some
 inspiration on where to go. After the trip, they'll be able to write a review on their experience and store it so that
 in the future they can see their notes when planning their next trip. For example the review could be "Don't forget to 
-pack a winter jacket when visiting New York in the fall, as it can get really cold but overall great experience. Budget
+pack a winter jacket when visiting New York in the fall, as it can get icy but overall great experience. Budget
 a little more than you usually would as it is an expensive city."
 
 ## User Stories
