@@ -69,7 +69,6 @@ public class TripPlannerApp {
 
     private void createReview() {
         List<Trip> trips = tripList.getTrips();
-
         if (trips.isEmpty()) {
             System.out.println("There are no trips to review.");
             return;
@@ -78,17 +77,18 @@ public class TripPlannerApp {
         for (int i = 0; i < trips.size(); i++) {
             System.out.println((i + 1) + ". " + trips.get(i).toString());
         }
-
         int tripIndex = scanner.nextInt();
         scanner.nextLine();
         if (tripIndex >= 1 && tripIndex <= trips.size()) {
             System.out.println("How was your trip! Enter your review: ");
             String review = scanner.nextLine();
             Trip selectedTrip = trips.get(tripIndex - 1);
-            tripList.createReview(selectedTrip, review);
-            System.out.println("Thank you! The review has been created for the selected trip.");
-        } else {
-            System.out.println("Invalid trip selection. Please try again.");
+            boolean reviewCreated = tripList.createReview(selectedTrip, review);
+            if (reviewCreated) {
+                System.out.println("Thank you! The review has been created for the selected trip.");
+            } else {
+                System.out.println("Failed to create the review. Please try again.");
+            }
         }
     }
 

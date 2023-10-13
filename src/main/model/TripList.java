@@ -19,9 +19,12 @@ public class TripList {
         return trips;
     }
 
-    public void createReview(Trip trip, String review) {
+    public boolean createReview(Trip trip, String review) {
         if (trips.contains(trip)) {
             trip.setReview(review);
+            return true;
+        } else {
+            return false;
         }
     }
 }
