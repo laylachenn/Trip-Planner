@@ -8,7 +8,7 @@ public class Trip {
     private final List<String> flights; //list of the flights
     private final List<String> hotels; //list of the name(s) of the hotel(s)
     private final List<String> destinations; //list of the destination(s)
-    private String review; //string of the post-travel review
+    private String review = ""; //string of the post-travel review as an empty string so it is never nul
 
     //REQUIRES:
     public Trip(List<String> flights, int tripLength, List<String> hotels, List<String> destinations) {

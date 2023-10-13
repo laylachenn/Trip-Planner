@@ -23,7 +23,7 @@ public class TripPlannerApp {
         System.out.println("2. View trips");
         System.out.println("3. Create a post-travel review");
         System.out.println("4. View trip presets");
-        System.out.println("5. Exit");
+        System.out.println("5. Exit the trip planner");
         System.out.print("Enter your choice: ");
     }
 
@@ -92,6 +92,12 @@ public class TripPlannerApp {
         }
     }
 
+    private void displayPreset(Trip tripPreset) {
+        System.out.println("Trip preset information:");
+        System.out.println(tripPreset.toString());
+    }
+
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     private void showPresets() {
         System.out.println("Preset Trips:");
         System.out.println("1. Tropical Hawaii Trip");
@@ -101,30 +107,43 @@ public class TripPlannerApp {
         int choice = scanner.nextInt();
         scanner.nextLine();
 
-        ////ADD INFO
+        Trip tripPreset = null;
+
+        ////CHANGE THE STRINGS
         switch (choice) {
             case 1:
-                makePreset("Tropical Hawaii Trip", List.of("Hawaii Flight"), 7,
+                tripPreset = makePreset("Tropical Hawaii Trip", List.of("Hawaii Flight"), 7,
                         List.of("Hawaii Hotel"), List.of("Hawaii Destination (Maui)"));
                 break;
             case 2:
-                makePreset("Winter New York City Trip", List.of("City Flight"), 5,
+                tripPreset = makePreset("Winter New York City Trip", List.of("City Flight"), 5,
                         List.of("City Hotel"), List.of("City Destination"));
                 break;
             case 3:
-                makePreset("Adventurous Japan Trip", List.of("Japan Flight"), 10,
+                tripPreset = makePreset("Adventurous Japan Trip", List.of("Japan Flight"), 10,
                         List.of("Japan Hotel"), List.of("Japan Destination (Tokyo)"));
                 break;
             default:
                 System.out.println("Invalid choice. Please try again.");
+                return;
+        }
+
+        displayPreset(tripPreset);
+        System.out.println("Do you want to add this preset to your list of trips? (1 for yes, 2 for no): ");
+        int createChoice = scanner.nextInt();
+        scanner.nextLine();
+
+        if (createChoice == 1) {
+            tripList.addTrip((tripPreset));
+            System.out.println("The trip preset has been added to your list of trips.");
+        } else {
+            System.out.println("The trip preset has not been added your list. Returning to menu.");
         }
     }
 
-    private void makePreset(String name, List<String> flights, int tripLength, List<String> hotels,
+    private Trip makePreset(String name, List<String> flights, int tripLength, List<String> hotels,
                             List<String> destinations) {
-        Trip presetTrip = new Trip(flights, tripLength, hotels, destinations);
-        System.out.println("Preset Trip: " + name);
-        System.out.println(presetTrip);
+        return new Trip(flights, tripLength, hotels, destinations);
     }
 
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
@@ -148,7 +167,7 @@ public class TripPlannerApp {
                     showPresets();
                     break;
                 case 5:
-                    System.out.println("Closing program.");
+                    System.out.println("Closing trip planner. Have a great day!");
                     System.exit(0);
                 default:
                     System.out.println("Invalid choice. Please try again.");
