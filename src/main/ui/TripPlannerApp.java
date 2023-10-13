@@ -8,6 +8,7 @@ import java.util.Scanner;
 //source scanner: https://www.w3schools.com/java/java_user_input.asp
 //source switch: https://docs.oracle.com/javase/tutorial/java/nutsandbolts/switch.html
 
+//Represents a trip planner application where the user can interact and input information that is stored
 public class TripPlannerApp {
     private final TripList tripList;
     private final Scanner scanner;
