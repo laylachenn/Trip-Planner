@@ -1,7 +1,7 @@
 package model;
 
 public class TripList {
-    public void addTrip {
+    public void addTrip() {
         //stub
     }
 }

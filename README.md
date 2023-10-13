@@ -18,6 +18,6 @@ and filter by most expensive, least expensive, most amount of stuff to do, etc.
 of days and hotels.
 - As a user, I want to be able to view my list of trips, and its different information in
 order to make it easy to see the different trip options and compare budgets.
-- As a user, I want to be able to filter my list of trips by different filters like price, most hotel options, etc.
+- As a user, I want to be able to view a few presets of trips in order to get some inspiration for my vacation.
 - As a user, I want to be able to select a trip and rate it and create a review of my experience, so I can refer to it
 in the future.
