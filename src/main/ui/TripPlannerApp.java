@@ -116,7 +116,7 @@ public class TripPlannerApp {
     //information on it. then the user will be able to add the preset to their list of trips if they want. if they
     //don't want to, then it will say that it's going back to the menu. it prints success and failure messages depending
     //on if the trip preset has been added to the list of trips
-    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
+    @SuppressWarnings({"checkstyle:methodlength", "checkstyle:SuppressWarnings"})
     private void showPresets() {
         System.out.println("Preset Trips:");
         System.out.println("1. Tropical Hawaii Trip");
@@ -136,7 +136,7 @@ public class TripPlannerApp {
                 break;
             case 2:
                 tripPreset = makePreset("Winter New York City Trip", List.of("YVR-JFK 12/20/23 @1am",
-                                "JFK-YVR 12/30/31 @4pm"), 10, List.of("Holiday Inn NYC", "The Manhattan"),
+                                "JFK-YVR 12/30/23 @4pm"), 10, List.of("Holiday Inn NYC", "The Manhattan"),
                         List.of("Manhattan", "Brooklyn"));
                 break;
             case 3:

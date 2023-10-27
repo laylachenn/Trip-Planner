@@ -23,3 +23,5 @@ the different trip options and compare itineraries.
 take the preset and have the option to add it to my trip list.
 - As a user, I want to be able to select a trip, and create a post-travel review and save the review with my trip, so I
 can see it at a later date.
+- As a user, I want to be able to save my list of trips to file (if I so choose)
+- As a user, I want to be able to load my list of trips from file (if I so choose)

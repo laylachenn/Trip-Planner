@@ -8,7 +8,7 @@ public class Trip {
     private final List<String> flights; //list of the flights
     private final List<String> hotels; //list of the name(s) of the hotel(s)
     private final List<String> destinations; //list of the destination(s)
-    private String review = ""; //string of the post-travel review as an empty string so it is never nul
+    private String review = ""; //string of the post-travel review as an empty string so it is never null
 
     //REQUIRES: all the parameters to be non-null including tripLength > 0, and to be the proper type
     //EFFECTS: constructs a trip that has a list of flights, an amount of days that the trip will be, a list of hotel(s)
