@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 import org.json.*;
 
 //code influenced by the JsonSerializationDemo
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
 public class JsonReader {
     private String source;

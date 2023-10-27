@@ -4,6 +4,9 @@ import model.TripList;
 import org.json.JSONObject;
 import java.io.*;
 
+//code influenced by the JsonSerializationDemo
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
