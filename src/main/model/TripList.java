@@ -1,10 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 //Represents a list of trips where you can modify the list by adding trips, and create reviews for a trip in the list
-public class TripList {
+public class TripList implements Writable {
     private final List<Trip> trips;
 
     //EFFECTS: constructs an array list that will hold trips
@@ -32,5 +36,23 @@ public class TripList {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("trip list", tripListToJson());
+        return json;
+    }
+
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray tripListToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Trip t : trips) {
+            jsonArray.put(t.toJson());
+        }
+
+        return jsonArray;
     }
 }

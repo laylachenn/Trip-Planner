@@ -1,9 +1,12 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.List;
 
 //Represents a trip having flights, number of days the trip is, hotels, and destinations.
-public class Trip {
+public class Trip implements Writable {
     private int tripLength; //amount of days that the trip will be
     private final List<String> flights; //list of the flights
     private final List<String> hotels; //list of the name(s) of the hotel(s)
@@ -74,6 +77,17 @@ public class Trip {
                 + "Trip Length: " + tripLength + "\n" + "Hotels: " + hotels + "\n"
                 + "Destinations: " + destinations;
 
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("flights", flights);
+        json.put("trip length", tripLength);
+        json.put("hotels", hotels);
+        json.put("destinations", destinations);
+        json.put("review", review);
+        return json;
     }
 
 }
