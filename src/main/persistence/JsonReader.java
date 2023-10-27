@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.stream.Stream;
 
 import org.json.*;
@@ -61,10 +60,10 @@ public class JsonReader {
     // MODIFIES: this
     // EFFECTS: parses trip from JSON object and adds it to trip list
     private void addTrip(TripList tl, JSONObject jsonObject) {
-        List<String> flights = (List<String>) jsonObject.getJSONObject("flights");
+        String flights = jsonObject.getString("flights");
         int tripLength = jsonObject.getInt("trip length");
-        List<String> hotels = (List<String>) jsonObject.getJSONObject("hotels");
-        List<String> destinations = (List<String>) jsonObject.getJSONObject("destinations");
+        String hotels = jsonObject.getString("hotels");
+        String destinations = jsonObject.getString("destinations");
         Trip trip = new Trip(flights, tripLength, hotels, destinations);
         tl.addTrip(trip);
     }

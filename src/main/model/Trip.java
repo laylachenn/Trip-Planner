@@ -3,20 +3,18 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
-import java.util.List;
-
 //Represents a trip having flights, number of days the trip is, hotels, and destinations.
 public class Trip implements Writable {
     private int tripLength; //amount of days that the trip will be
-    private final List<String> flights; //list of the flights
-    private final List<String> hotels; //list of the name(s) of the hotel(s)
-    private final List<String> destinations; //list of the destination(s)
+    private final String flights; //list of the flights
+    private final String hotels; //list of the name(s) of the hotel(s)
+    private final String destinations; //list of the destination(s)
     private String review = ""; //string of the post-travel review as an empty string so it is never null
 
     //REQUIRES: all the parameters to be non-null including tripLength > 0, and to be the proper type
     //EFFECTS: constructs a trip that has a list of flights, an amount of days that the trip will be, a list of hotel(s)
     //and a list of destination(s)
-    public Trip(List<String> flights, int tripLength, List<String> hotels, List<String> destinations) {
+    public Trip(String flights, int tripLength, String hotels, String destinations) {
         this.flights = flights;
         this.tripLength = tripLength;
         this.hotels = hotels;
@@ -27,37 +25,19 @@ public class Trip implements Writable {
         this.tripLength = tripLength;
     }
 
-    //MODIFIES: this
-    //EFFECTS: adds a flight to the list of flights
-    public void addFlight(String flight) {
-        flights.add(flight);
-    }
-
-    //MODIFIES: this
-    //EFFECTS: adds a hotel to the list of hotels
-    public void addHotel(String hotel) {
-        hotels.add(hotel);
-    }
-
-    //MODIFIES: this
-    //EFFECTS: adds a destination to the list of destinations
-    public void addDestination(String destination) {
-        destinations.add(destination);
-    }
-
     public int getTripLength() {
         return tripLength;
     }
 
-    public List<String> getFlights() {
+    public String getFlights() {
         return flights;
     }
 
-    public List<String> getHotels() {
+    public String getHotels() {
         return hotels;
     }
 
-    public List<String> getDestinations() {
+    public String getDestinations() {
         return destinations;
     }
 

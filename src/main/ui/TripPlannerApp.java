@@ -2,21 +2,31 @@ package ui;
 
 import model.Trip;
 import model.TripList;
+import persistence.JsonReader;
+import persistence.JsonWriter;
+
 import java.util.List;
 import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 //source scanner: https://www.w3schools.com/java/java_user_input.asp
 //source switch: https://docs.oracle.com/javase/tutorial/java/nutsandbolts/switch.html
 
 //Represents a trip planner application where the user can interact and input information that is stored
 public class TripPlannerApp {
-    private final TripList tripList;
+    private static final String JSON_STORE = "./data/triplist.json";
+    private TripList tripList;
     private final Scanner scanner;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     //EFFECTS: constructs a trip list and a scanner that will read input from the user and allow for interaction
-    public TripPlannerApp() {
+    public TripPlannerApp() throws FileNotFoundException {
         tripList = new TripList();
         scanner = new Scanner(System.in);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
     }
 
     //EFFECTS: prints a trip planner menu with different options for the user, and the last line will allow the user to
@@ -27,7 +37,9 @@ public class TripPlannerApp {
         System.out.println("2. View trips");
         System.out.println("3. Create a post-travel review");
         System.out.println("4. View trip presets");
-        System.out.println("5. Exit the trip planner");
+        System.out.println("5. Save trips to file");
+        System.out.println("6. Load trips from file");
+        System.out.println("7. Exit the trip planner");
         System.out.print("Enter your choice: ");
     }
 
@@ -42,15 +54,15 @@ public class TripPlannerApp {
 
         System.out.println("Enter flight information separated by commas: ");
         String flightInfo = scanner.nextLine();
-        List<String> flights = List.of(flightInfo.split(","));
+        String flights = flightInfo;
 
         System.out.println("Enter the names of your hotel(s) separated by commas: ");
         String hotelInfo = scanner.nextLine();
-        List<String> hotels = List.of(hotelInfo.split(","));
+        String hotels = hotelInfo;
 
         System.out.println("Enter the names of your destination(s) separated by commas: ");
         String destinationInfo = scanner.nextLine();
-        List<String> destinations = List.of(destinationInfo.split(","));
+        String destinations = destinationInfo;
 
         Trip newTrip = new Trip(flights, tripLength, hotels, destinations);
         tripList.addTrip(newTrip);
@@ -130,20 +142,19 @@ public class TripPlannerApp {
 
         switch (choice) {
             case 1:
-                tripPreset = makePreset("Tropical Hawaii Trip", List.of("YVR-ITO 3/21/24 @9am",
-                                "ITO-YVR 3/28/24 @1pm"), 7,
-                        List.of("Hilo Hawaiian Hotel","Paradise Bay Resort"), List.of("Hilo", "Kailua"));
+                tripPreset = makePreset("Tropical Hawaii Trip",
+                        "YVR-ITO 3/21/24 @9am, ITO-YVR 3/28/24 @1pm", 7,
+                        "Hilo Hawaiian Hotel, Paradise Bay Resort", "Hilo, Kailua");
                 break;
             case 2:
-                tripPreset = makePreset("Winter New York City Trip", List.of("YVR-JFK 12/20/23 @1am",
-                                "JFK-YVR 12/30/23 @4pm"), 10, List.of("Holiday Inn NYC", "The Manhattan"),
-                        List.of("Manhattan", "Brooklyn"));
+                tripPreset = makePreset("Winter New York City Trip",
+                        "YVR-JFK 12/20/23 @1am, JFK-YVR 12/30/23 @4pm", 10,
+                        "Holiday Inn NYC, The Manhattan", "Manhattan, Brooklyn");
                 break;
             case 3:
-                tripPreset = makePreset("Adventurous Japan Trip", List.of("YVR-ITM 11/12/23 @3pm",
-                                "KIX-YVR 11/26/23 @9pm"), 14,
-                        List.of("Plaza Osaka", "Tokyo Grand Hotel", "Park Hotel Kyoto"),
-                        List.of("Osaka", "Tokyo", "Kyoto"));
+                tripPreset = makePreset("Adventurous Japan Trip",
+                        "YVR-ITM 11/12/23 @3pm, KIX-YVR 11/26/23 @9pm", 14,
+                        "Plaza Osaka, Tokyo Grand Hotel, Park Hotel Kyoto", "Osaka, Tokyo, Kyoto");
                 break;
             default:
                 System.out.println("Invalid choice. Please try again.");
@@ -165,8 +176,8 @@ public class TripPlannerApp {
 
     //REQUIRES: the parameters to be non-null
     //EFFECTS: constructs a new trip object with all the details
-    private Trip makePreset(String name, List<String> flights, int tripLength, List<String> hotels,
-                            List<String> destinations) {
+    private Trip makePreset(String name, String flights, int tripLength, String hotels,
+                            String destinations) {
         return new Trip(flights, tripLength, hotels, destinations);
     }
 
@@ -195,11 +206,40 @@ public class TripPlannerApp {
                     showPresets();
                     break;
                 case 5:
+                    saveTripList();
+                    break;
+                case 6:
+                    loadTripList();
+                    break;
+                case 7:
                     System.out.println("Closing trip planner. Have a great day!");
                     System.exit(0);
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
+        }
+    }
+
+    //EFFECTS: saves the trip list to file
+    private void saveTripList() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(tripList);
+            jsonWriter.close();
+            System.out.println("Saved trip list to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    //MODIFIES: this
+    //EFFECTS: loads trip list from file
+    private void loadTripList() {
+        try {
+            tripList = jsonReader.read();
+            System.out.println("Loaded trip list from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 }

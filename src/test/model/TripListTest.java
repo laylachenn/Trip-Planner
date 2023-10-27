@@ -3,7 +3,6 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,9 +16,9 @@ public class TripListTest {
     @BeforeEach
     void runBefore() {
         testTripList = new TripList();
-        trip1 = new Trip(new ArrayList<>(), 0, new ArrayList<>(), new ArrayList<>());
-        trip2 = new Trip(new ArrayList<>(), 0, new ArrayList<>(), new ArrayList<>());
-        nonExistentTrip = new Trip(new ArrayList<>(), 0, new ArrayList<>(), new ArrayList<>());
+        trip1 = new Trip("", 0, "", "");
+        trip2 = new Trip("", 0, "", "");
+        nonExistentTrip = new Trip("", 0, "", "");
     }
 
     @Test
