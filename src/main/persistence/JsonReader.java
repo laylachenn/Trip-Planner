@@ -14,6 +14,7 @@ import org.json.*;
 //code influenced by the JsonSerializationDemo
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
+//Represents a reader that can read data that is saved and add it to the trip list
 public class JsonReader {
     private String source;
 
