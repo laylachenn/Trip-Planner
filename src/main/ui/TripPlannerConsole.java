@@ -14,7 +14,7 @@ import java.io.IOException;
 //source switch: https://docs.oracle.com/javase/tutorial/java/nutsandbolts/switch.html
 
 //Represents a trip planner application where the user can interact and input information that is stored
-public class TripPlannerApp {
+public class TripPlannerConsole {
     private static final String JSON_STORE = "./data/triplist.json";
     private TripList tripList;
     private final Scanner scanner;
@@ -22,7 +22,7 @@ public class TripPlannerApp {
     private JsonReader jsonReader;
 
     //EFFECTS: constructs a trip list and a scanner that will read input from the user and allow for interaction
-    public TripPlannerApp() throws FileNotFoundException {
+    public TripPlannerConsole() throws FileNotFoundException {
         tripList = new TripList();
         scanner = new Scanner(System.in);
         jsonWriter = new JsonWriter(JSON_STORE);
