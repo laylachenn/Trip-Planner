@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.util.List;
 
 public class TripPlannerGUI extends JFrame {
     private static TripPlannerConsole tripPlannerConsole;
@@ -123,11 +124,58 @@ public class TripPlannerGUI extends JFrame {
     }
 
     private void viewTripsAction() {
-        //stub
+        List<Trip> trips = tripList.getTrips();
+        if (trips.isEmpty()) {
+            tripsTextArea.setText("There are no trips to view.");
+        } else {
+            StringBuilder tripInfo = new StringBuilder("List of trips:\n");
+            for (int i = 0; i < trips.size(); i++) {
+                Trip trip = trips.get(i);
+                tripInfo.append((i+1)).append(". ").append(trip.toString()).append("\n");
+                String review = trip.getReview();
+                if (!review.isEmpty()) {
+                    tripInfo.append("Review: ").append(review).append("\n");
+                }
+            }
+            tripsTextArea.setText(tripInfo.toString());
+        }
     }
 
+    @SuppressWarnings("checkstyle:MethodLength")
     private void addReviewAction() {
-        //stub
+        boolean finished = false;
+        List<Trip> trips = tripList.getTrips();
+        if (trips.isEmpty()) {
+            tripsTextArea.setText("There are no trips to review.");
+        } else {
+            String[] tripOptions = trips.stream().map(Trip::toString).toArray(String[]::new);
+            String selectedTrip = (String) JOptionPane.showInputDialog(
+                    this,
+                    "Select a trip to add a review:",
+                    "Add Review",
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    tripOptions,
+                    tripOptions[0]);
+            if (selectedTrip != null) {
+                String review = JOptionPane.showInputDialog(this, "Enter your review: ");
+                if (review != null) {
+                    for (Trip trip : trips) {
+                        if (trip.toString().equals(selectedTrip)) {
+                            boolean reviewAdded = tripList.createReview(trip, review);
+                            String message = reviewAdded ? "Review added successfully."
+                                    : "Failed to add review. Try again.";
+                            tripsTextArea.setText(message);
+                            finished = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (!finished) {
+                tripsTextArea.setText("Invalid trip selection. Try again");
+            }
+        }
     }
 
     private void saveAction() {
@@ -142,6 +190,7 @@ public class TripPlannerGUI extends JFrame {
         SwingUtilities.invokeLater(() -> {
             try {
                 TripPlannerConsole tripPlannerConsole = new TripPlannerConsole();
+                TripPlannerGUI tripPlannerGUI = new TripPlannerGUI(tripPlannerConsole);
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
