@@ -47,7 +47,7 @@ public class TripPlannerConsole {
     //EFFECTS: asks the user for information on the trip they would like to plan such as trip length, flights, hotels
     //and destinations. then constructs a trip with the given information and adds it to their trip list. prints a
     //message of success at the end.
-    private void addTrip() {
+    public void addTrip() {
         System.out.println("Enter the number of days the trip will be: ");
         int tripLength = scanner.nextInt();
         scanner.nextLine();
@@ -241,5 +241,10 @@ public class TripPlannerConsole {
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
+    }
+
+    //EFFECTS: returns the trip list
+    public TripList getTripList() {
+        return tripList;
     }
 }
