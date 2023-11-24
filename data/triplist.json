@@ -1,7 +1,16 @@
-{"trip list": [{
-    "trip length": 4,
-    "hotels": "dsff",
-    "review": "gfd",
-    "destinations": "sfsf",
-    "flights": "ds"
-}]}
+{"trip list": [
+    {
+        "trip length": 3,
+        "hotels": "sdad",
+        "review": "sdasd",
+        "destinations": "dasd",
+        "flights": "fdsf3"
+    },
+    {
+        "trip length": 3,
+        "hotels": "dsad",
+        "review": "",
+        "destinations": "sadad",
+        "flights": "dsadad"
+    }
+]}

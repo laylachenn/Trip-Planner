@@ -18,8 +18,8 @@ public class TripPlannerConsole {
     private static final String JSON_STORE = "./data/triplist.json";
     private TripList tripList;
     private final Scanner scanner;
-    private JsonWriter jsonWriter;
-    private JsonReader jsonReader;
+    private final JsonWriter jsonWriter;
+    private final JsonReader jsonReader;
     private TripPlannerGUI tripPlannerGUI;
 
     //EFFECTS: constructs a trip list and a scanner that will read input from the user and allow for interaction
@@ -44,6 +44,7 @@ public class TripPlannerConsole {
         System.out.print("Enter your choice: ");
     }
 
+    //REQUIRES: trip length to be an integer, rest are strings
     //MODIFIES: this
     //EFFECTS: asks the user for information on the trip they would like to plan such as trip length, flights, hotels
     //and destinations. then constructs a trip with the given information and adds it to their trip list. prints a
@@ -54,16 +55,13 @@ public class TripPlannerConsole {
         scanner.nextLine();
 
         System.out.println("Enter flight information separated by commas: ");
-        String flightInfo = scanner.nextLine();
-        String flights = flightInfo;
+        String flights = scanner.nextLine();
 
         System.out.println("Enter the names of your hotel(s) separated by commas: ");
-        String hotelInfo = scanner.nextLine();
-        String hotels = hotelInfo;
+        String hotels = scanner.nextLine();
 
         System.out.println("Enter the names of your destination(s) separated by commas: ");
-        String destinationInfo = scanner.nextLine();
-        String destinations = destinationInfo;
+        String destinations = scanner.nextLine();
 
         Trip newTrip = new Trip(flights, tripLength, hotels, destinations);
         tripList.addTrip(newTrip);
@@ -112,7 +110,7 @@ public class TripPlannerConsole {
             boolean reviewCreated = tripList.createReview(selectedTrip, review);
             if (reviewCreated) {
                 System.out.println("Thank you! The review has been created for the selected trip.");
-                tripPlannerGUI.updateTripList();
+                tripPlannerGUI.viewTripsAction();
             } else {
                 System.out.println("Failed to create the review. Please try again.");
             }
@@ -140,7 +138,7 @@ public class TripPlannerConsole {
         int choice = scanner.nextInt();
         scanner.nextLine();
 
-        Trip tripPreset = null;
+        Trip tripPreset;
 
         switch (choice) {
             case 1:
@@ -178,7 +176,7 @@ public class TripPlannerConsole {
 
     //REQUIRES: the parameters to be non-null
     //EFFECTS: constructs a new trip object with all the details
-    private Trip makePreset(String name, String flights, int tripLength, String hotels,
+    private Trip makePreset(String ignoredName, String flights, int tripLength, String hotels,
                             String destinations) {
         return new Trip(flights, tripLength, hotels, destinations);
     }
@@ -251,7 +249,7 @@ public class TripPlannerConsole {
     }
     
     // MODIFIES: this
-    //EFFECTS: creates a new instance of the trip planner gui
+    //EFFECTS: creates
     public void setTripPlannerGUI(TripPlannerGUI tripPlannerGUI) {
         this.tripPlannerGUI = tripPlannerGUI;
     }

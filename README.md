@@ -28,8 +28,15 @@ can see it at a later date.
 
 ## Instructions for Grader
 
-- You can generate the first required action related to the user story "adding multiple Xs to a Y" by...
-- You can generate the second required action related to the user story "adding multiple Xs to a Y" by...
-- You can locate my visual component by...
-- You can save the state of my application by...
-- You can reload the state of my application by...
+- You can generate the first required action related to the user story "adding multiple Xs to a Y" by clicking the add
+trip button at the top left of the GUI. Then input your information in the text boxes where the trip length is an
+integer. Press OK to view the trips.
+- You can generate the second required action related to the user story "adding multiple Xs to a Y" by clicking the add
+review button at the top of the GUI. Then you will be prompted to select the trip that you wish to add a review to with
+a dropdown menu. After selecting the trip, press OK. Next, type your review and press OK.
+- You can locate my visual component by clicking the add trip button at the top left of the GUI. You will see a picture
+of a relaxing scene at the beach.
+- You can save the state of my application by pressing the save button at the top of the GUI. It will say if it has
+been saved successfully.
+- You can reload the state of my application by pressing the load button at the top of the GUI. It will display your
+saved trips.

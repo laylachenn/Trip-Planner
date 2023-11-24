@@ -16,7 +16,7 @@ import org.json.*;
 
 //Represents a reader that can read data that is saved and add it to the trip list
 public class JsonReader {
-    private String source;
+    private final String source;
 
     // EFFECTS: constructs reader to read from source file
     public JsonReader(String source) {
@@ -36,7 +36,7 @@ public class JsonReader {
         StringBuilder contentBuilder = new StringBuilder();
 
         try (Stream<String> stream = Files.lines(Paths.get(source), StandardCharsets.UTF_8)) {
-            stream.forEach(s -> contentBuilder.append(s));
+            stream.forEach(contentBuilder::append);
         }
 
         return contentBuilder.toString();
@@ -66,7 +66,9 @@ public class JsonReader {
         int tripLength = jsonObject.getInt("trip length");
         String hotels = jsonObject.getString("hotels");
         String destinations = jsonObject.getString("destinations");
+        String review = jsonObject.getString("review");
         Trip trip = new Trip(flights, tripLength, hotels, destinations);
+        trip.setReview(review);
         tl.addTrip(trip);
     }
 }

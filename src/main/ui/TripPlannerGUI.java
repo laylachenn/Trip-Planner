@@ -10,10 +10,27 @@ import java.awt.*;
 import java.io.*;
 import java.util.List;
 
+//source: https://www.guru99.com/java-swing-gui.html
+//source: https://tutorials.tinyappco.com/Java/SwingGUI
+
+//Represents a trip planner application GUI where the user can interact and input information that is stored
 public class TripPlannerGUI extends JFrame {
     private JTextArea tripsTextArea;
     private TripList tripList;
 
+    private String selectTripForReview(List<Trip> trips) {
+        String[] tripOptions = trips.stream().map(Trip::toString).toArray(String[]::new);
+        return (String) JOptionPane.showInputDialog(
+                this,
+                "Select a trip to add a review:",
+                "Add Review",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                tripOptions,
+                tripOptions[0]);
+    }
+
+    //EFFECTS: constructs a trip planner gui where it sets up the buttons, variables, frame and action listeners
     public TripPlannerGUI(TripPlannerConsole tripPlannerConsole) throws FileNotFoundException {
         initializeVariables(tripPlannerConsole);
         setupFrame();
@@ -23,10 +40,13 @@ public class TripPlannerGUI extends JFrame {
         setVisible(true);
     }
 
+    //MODIFIES: this
+    //EFFECTS: initializes the variables by getting trip list from the console class
     private void initializeVariables(TripPlannerConsole tripPlannerConsole) {
         this.tripList = tripPlannerConsole.getTripList();
     }
 
+    //EFFECTS: sets up the frame (title, size, closing, layout)
     private void setupFrame() {
         setTitle("Trip Planner");
         setSize(600, 400);
@@ -34,6 +54,9 @@ public class TripPlannerGUI extends JFrame {
         setLayout(new BorderLayout());
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets up the buttons at the top of the GUI
+    //and assigns actions listeners to them
     private void setupButtonPanel() {
         JPanel buttonPanel = new JPanel(new FlowLayout());
         String[] buttonLabels = {"Add Trip", "Add Review", "Save", "Load"};
@@ -46,12 +69,17 @@ public class TripPlannerGUI extends JFrame {
         add(buttonPanel, BorderLayout.NORTH);
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets up the display area for the list of trips
     private void setupTripsTextArea() {
         tripsTextArea = new JTextArea(15, 40);
         JScrollPane scrollPane = new JScrollPane(tripsTextArea);
         add(scrollPane, BorderLayout.CENTER);
     }
 
+    //MODIFIES: this
+    //EFFECTS: creates actions listeners to the buttons in the GUI,
+    //so they'll do as told
     private void addActionListeners() {
         Component[] components = getContentPane().getComponents();
         for (Component component : components) {
@@ -62,10 +90,12 @@ public class TripPlannerGUI extends JFrame {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: using switch to call different methods when each button is clicked
     private void handleButtonClick(String buttonText) {
         switch (buttonText) {
             case "Add Trip":
-                addTripAction();
+                showAddTripAction();
                 break;
             case "Add Review":
                 addReviewAction();
@@ -81,10 +111,8 @@ public class TripPlannerGUI extends JFrame {
         }
     }
 
-    private void addTripAction() {
-        showAddTripAction();
-    }
-
+    //EFFECTS: creates an add trip panel once the add trip button is clicked
+    // with different text boxes for user input, also displays a picture of a nice beach
     private void showAddTripAction() {
         JPanel addTripPanel = new JPanel(new GridLayout(5, 2));
 
@@ -113,13 +141,17 @@ public class TripPlannerGUI extends JFrame {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: adds a trip to the trip list and displays the updated trip list
     private void addTrip(int tripLength, String flights, String hotels, String destinations) {
         Trip newTrip = new Trip(flights, tripLength, hotels, destinations);
         tripList.addTrip(newTrip);
         viewTripsAction();
     }
 
-    private void viewTripsAction() {
+    //MODIFIES: this
+    //EFFECTS: updates the main frame with the list of trips being displayed
+    public void viewTripsAction() {
         List<Trip> trips = tripList.getTrips();
         if (trips.isEmpty()) {
             tripsTextArea.setText("There are no trips to view.");
@@ -137,22 +169,8 @@ public class TripPlannerGUI extends JFrame {
         }
     }
 
-    public void updateTripList() {
-        viewTripsAction();
-    }
-
-    private String selectTripForReview(List<Trip> trips) {
-        String[] tripOptions = trips.stream().map(Trip::toString).toArray(String[]::new);
-        return (String) JOptionPane.showInputDialog(
-                this,
-                "Select a trip to add a review:",
-                "Add Review",
-                JOptionPane.PLAIN_MESSAGE,
-                null,
-                tripOptions,
-                tripOptions[0]);
-    }
-
+    //MODIFIES: this
+    //EFFECTS: adds a review to the selected trip in the trip list based on the user input
     private void addReviewToSelectedTrip(String selectedTrip, String review, List<Trip> trips) {
         if (selectedTrip != null && review != null) {
             boolean finished = false;
@@ -174,6 +192,9 @@ public class TripPlannerGUI extends JFrame {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: gives an option panel for the user to add a review,
+    //and then adds the review to the selected trip
     private void addReviewAction() {
         List<Trip> trips = tripList.getTrips();
         if (trips.isEmpty()) {
@@ -185,6 +206,7 @@ public class TripPlannerGUI extends JFrame {
         addReviewToSelectedTrip(selectedTrip, review, trips);
     }
 
+    //EFFECTS: saves the trip list to file
     private void saveAction() {
         try {
             JsonWriter jsonWriter = new JsonWriter("./data/triplist.json");
@@ -197,6 +219,8 @@ public class TripPlannerGUI extends JFrame {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: loads trip list from file
     private void loadAction() {
         try {
             JsonReader jsonReader = new JsonReader("./data/triplist.json");
@@ -208,6 +232,7 @@ public class TripPlannerGUI extends JFrame {
         }
     }
 
+    //EFFECTS: runs the GUI application
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             try {
