@@ -20,6 +20,7 @@ public class TripPlannerConsole {
     private final Scanner scanner;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
+    private TripPlannerGUI tripPlannerGUI;
 
     //EFFECTS: constructs a trip list and a scanner that will read input from the user and allow for interaction
     public TripPlannerConsole() throws FileNotFoundException {
@@ -111,6 +112,7 @@ public class TripPlannerConsole {
             boolean reviewCreated = tripList.createReview(selectedTrip, review);
             if (reviewCreated) {
                 System.out.println("Thank you! The review has been created for the selected trip.");
+                tripPlannerGUI.updateTripList();
             } else {
                 System.out.println("Failed to create the review. Please try again.");
             }
@@ -246,5 +248,11 @@ public class TripPlannerConsole {
     //EFFECTS: returns the trip list
     public TripList getTripList() {
         return tripList;
+    }
+    
+    // MODIFIES: this
+    //EFFECTS: creates a new instance of the trip planner gui
+    public void setTripPlannerGUI(TripPlannerGUI tripPlannerGUI) {
+        this.tripPlannerGUI = tripPlannerGUI;
     }
 }
