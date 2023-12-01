@@ -40,3 +40,7 @@ of a relaxing scene at the beach.
 been saved successfully.
 - You can reload the state of my application by pressing the load button at the top of the GUI. It will display your
 saved trips.
+
+## Phase 4: Task 2
+
+![img.png](img.png)

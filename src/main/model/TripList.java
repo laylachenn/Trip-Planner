@@ -10,10 +10,12 @@ import java.util.List;
 //Represents a list of trips where you can modify the list by adding trips, and create reviews for a trip in the list
 public class TripList implements Writable {
     private final List<Trip> trips;
+    private final EventLog eventLog;
 
     //EFFECTS: constructs an array list that will hold trips
     public TripList() {
         trips = new ArrayList<>();
+        eventLog = EventLog.getInstance();
     }
 
     //REQUIRES: a trip to have information in all the parameters
@@ -21,6 +23,7 @@ public class TripList implements Writable {
     //EFFECTS: adds a trip to the list of trips
     public void addTrip(Trip trip) {
         trips.add(trip);
+        eventLog.logEvent(new Event("Trip added to the trip list."));
     }
 
     public List<Trip> getTrips() {
@@ -32,6 +35,7 @@ public class TripList implements Writable {
     public boolean createReview(Trip trip, String review) {
         if (trips.contains(trip)) {
             trip.setReview(review);
+            eventLog.logEvent(new Event("Review added to the trip."));
             return true;
         } else {
             return false;
