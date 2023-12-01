@@ -249,7 +249,7 @@ public class TripPlannerConsole {
     }
     
     // MODIFIES: this
-    //EFFECTS: creates
+    //EFFECTS: creates an instance of a trip planner gui
     public void setTripPlannerGUI(TripPlannerGUI tripPlannerGUI) {
         this.tripPlannerGUI = tripPlannerGUI;
     }

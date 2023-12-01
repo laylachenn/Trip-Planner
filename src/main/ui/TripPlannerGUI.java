@@ -12,6 +12,7 @@ import java.util.List;
 
 //source: https://www.guru99.com/java-swing-gui.html
 //source: https://tutorials.tinyappco.com/Java/SwingGUI
+//source: https://www.educba.com/joptionpane-in-java/
 
 //Represents a trip planner application GUI where the user can interact and input information that is stored
 public class TripPlannerGUI extends JFrame {
@@ -230,18 +231,5 @@ public class TripPlannerGUI extends JFrame {
         } catch (IOException e) {
             tripsTextArea.setText("Error: Unable to load trip list.");
         }
-    }
-
-    //EFFECTS: runs the GUI application
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            try {
-                TripPlannerConsole tripPlannerConsole = new TripPlannerConsole();
-                TripPlannerGUI tripPlannerGUI = new TripPlannerGUI(tripPlannerConsole);
-                tripPlannerConsole.setTripPlannerGUI(tripPlannerGUI);
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-        });
     }
 }
