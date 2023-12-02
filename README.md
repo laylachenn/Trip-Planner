@@ -47,4 +47,13 @@ saved trips.
 
 ## Phase 4: Task 3
 
-- 
+- I would first of all refactor the main class, so it is not dependent on the console and GUI classes, as well as the
+Event and EventLog classes. This would make it so that main simply runs the program and doesn't perform things such as
+constructing and printing the actions in the console. I would also try to refactor the GUI class, so it is not
+associated with the console class, as this made it difficult in drawing the UML diagram. If I commented out the console
+class, my GUI class would not work properly, and that is a design problem as my console class is not functioning
+anymore anyway.
+- The main thing that I could do to improve the design of my project would be to separate my methods into more classes
+to follow the single responsibility principle. Currently, the UI classes especially have a bunch of different
+functionalities that are merged into one class, and it makes it difficult to find specific methods that I am trying to
+fix or add to. In the future, I will definitely split up my classes and follow the single responsibility principle more.
